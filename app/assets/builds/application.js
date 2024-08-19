@@ -37515,7 +37515,6 @@
           // Ensures the image fills the height of the container
           objectFit: "contain",
           // Ensures the image fits within the container without distortion
-          // position: 'relative', // Keep the image positioned correctly
           top: "0",
           // Reset the top position
           left: "0",
