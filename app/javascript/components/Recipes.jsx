@@ -24,11 +24,13 @@ const Recipes = () => {
   const allRecipes = recipes.map((recipe, index) => (
     <div key={index} className="col-md-6 col-lg-4">
       <div className="card mb-4">
+      {recipe.image_url && (
         <img
-          src={recipe.image}
+          src={recipe.image_url}
           className="card-img-top"
           alt={`${recipe.name} image`}
         />
+      )}
         <div className="card-body">
           <h5 className="card-title">{recipe.name}</h5>
           <Link to={`/recipe/${recipe.id}`} className="btn custom-button">
@@ -41,7 +43,7 @@ const Recipes = () => {
   const noRecipe = (
     <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
       <h4>
-        No recipes yet. Why not <Link to="/new_recipe">create one</Link>
+        No recipes yet. Why not <Link to="/recipe">create one</Link>
       </h4>
     </div>
   );

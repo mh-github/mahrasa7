@@ -37448,15 +37448,15 @@
         throw new Error("Network response was not ok.");
       }).then((res) => setRecipes(res)).catch(() => navigate("/"));
     }, []);
-    const allRecipes = recipes.map((recipe, index) => /* @__PURE__ */ import_react2.default.createElement("div", { key: index, className: "col-md-6 col-lg-4" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "card mb-4" }, /* @__PURE__ */ import_react2.default.createElement(
+    const allRecipes = recipes.map((recipe, index) => /* @__PURE__ */ import_react2.default.createElement("div", { key: index, className: "col-md-6 col-lg-4" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "card mb-4" }, recipe.image_url && /* @__PURE__ */ import_react2.default.createElement(
       "img",
       {
-        src: recipe.image,
+        src: recipe.image_url,
         className: "card-img-top",
         alt: `${recipe.name} image`
       }
     ), /* @__PURE__ */ import_react2.default.createElement("div", { className: "card-body" }, /* @__PURE__ */ import_react2.default.createElement("h5", { className: "card-title" }, recipe.name), /* @__PURE__ */ import_react2.default.createElement(Link, { to: `/recipe/${recipe.id}`, className: "btn custom-button" }, "View Recipe")))));
-    const noRecipe = /* @__PURE__ */ import_react2.default.createElement("div", { className: "vw-100 vh-50 d-flex align-items-center justify-content-center" }, /* @__PURE__ */ import_react2.default.createElement("h4", null, "No recipes yet. Why not ", /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/new_recipe" }, "create one")));
+    const noRecipe = /* @__PURE__ */ import_react2.default.createElement("div", { className: "vw-100 vh-50 d-flex align-items-center justify-content-center" }, /* @__PURE__ */ import_react2.default.createElement("h4", null, "No recipes yet. Why not ", /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/recipe" }, "create one")));
     return /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("section", { className: "jumbotron jumbotron-fluid text-center" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "container py-5" }, /* @__PURE__ */ import_react2.default.createElement("h1", { className: "display-4" }, "Recipes for every occasion"), /* @__PURE__ */ import_react2.default.createElement("p", { className: "lead text-muted" }, "We\u2019ve pulled together our most popular recipes, our latest additions, and our editor\u2019s picks, so there\u2019s sure to be something tempting for you to try."))), /* @__PURE__ */ import_react2.default.createElement("div", { className: "py-5" }, /* @__PURE__ */ import_react2.default.createElement("main", { className: "container" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "text-end mb-3" }, /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/recipe", className: "btn custom-button" }, "Create New Recipe")), /* @__PURE__ */ import_react2.default.createElement("div", { className: "row" }, recipes.length > 0 ? allRecipes : noRecipe), /* @__PURE__ */ import_react2.default.createElement(Link, { to: "/", className: "btn btn-link" }, "Home"))));
   };
   var Recipes_default = Recipes;
@@ -37503,14 +37503,28 @@
       return ingredientList2;
     };
     const recipeInstruction = addHtmlEntities(recipe.instruction);
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "hero position-relative d-flex align-items-center justify-content-center" }, /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "hero position-relative d-flex align-items-center justify-content-center", style: { height: "400px" } }, recipe.image_url && /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: "100%", maxWidth: "800px", height: "100%", overflow: "hidden", position: "relative" } }, /* @__PURE__ */ import_react3.default.createElement(
       "img",
       {
-        src: recipe.image,
+        src: recipe.image_url,
         alt: `${recipe.name} image`,
-        className: "img-fluid position-absolute"
+        style: {
+          width: "100%",
+          // Ensures the image doesn't exceed the width of its container
+          height: "100%",
+          // Ensures the image fills the height of the container
+          objectFit: "contain",
+          // Ensures the image fits within the container without distortion
+          // position: 'relative', // Keep the image positioned correctly
+          top: "0",
+          // Reset the top position
+          left: "0",
+          // Reset the left position
+          transform: "none"
+          // Reset the transform
+        }
       }
-    ), /* @__PURE__ */ import_react3.default.createElement("div", { className: "overlay bg-dark position-absolute" }), /* @__PURE__ */ import_react3.default.createElement("h1", { className: "display-4 position-relative text-white" }, recipe.name)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "container py-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "col-sm-12 col-lg-3" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "list-group" }, /* @__PURE__ */ import_react3.default.createElement("h5", { className: "mb-2" }, "Ingredients"), ingredientList())), /* @__PURE__ */ import_react3.default.createElement("div", { className: "col-sm-12 col-lg-7" }, /* @__PURE__ */ import_react3.default.createElement("h5", { className: "mb-2" }, "Preparation Instructions"), /* @__PURE__ */ import_react3.default.createElement(
+    )), /* @__PURE__ */ import_react3.default.createElement("h1", { className: "text-center", style: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" } }, recipe.name)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "container py-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "col-sm-12 col-lg-3" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "list-group" }, /* @__PURE__ */ import_react3.default.createElement("h5", { className: "mb-2" }, "Ingredients"), ingredientList())), /* @__PURE__ */ import_react3.default.createElement("div", { className: "col-sm-12 col-lg-7" }, /* @__PURE__ */ import_react3.default.createElement("h5", { className: "mb-2" }, "Preparation Instructions"), /* @__PURE__ */ import_react3.default.createElement(
       "div",
       {
         dangerouslySetInnerHTML: {
@@ -37536,30 +37550,33 @@
     const [name, setName] = (0, import_react4.useState)("");
     const [ingredients, setIngredients] = (0, import_react4.useState)("");
     const [instruction, setInstruction] = (0, import_react4.useState)("");
+    const [image, setImage] = (0, import_react4.useState)(null);
     const stripHtmlEntities = (str) => {
       return String(str).replace(/\n/g, "<br> <br>").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     };
     const onChange = (event, setFunction) => {
       setFunction(event.target.value);
     };
+    const onImageChange = (event) => {
+      setImage(event.target.files[0]);
+    };
     const onSubmit = (event) => {
       event.preventDefault();
       const url = "/api/v1/recipes/create";
       if (name.length == 0 || ingredients.length == 0 || instruction.length == 0)
         return;
-      const body = {
-        name,
-        ingredients,
-        instruction: stripHtmlEntities(instruction)
-      };
+      const formData = new FormData();
+      formData.append("recipe[name]", name);
+      formData.append("recipe[ingredients]", ingredients);
+      formData.append("recipe[instruction]", stripHtmlEntities(instruction));
+      formData.append("recipe[image]", image);
       const token = document.querySelector('meta[name="csrf-token"]').content;
       fetch(url, {
         method: "POST",
         headers: {
-          "X-CSRF-Token": token,
-          "Content-Type": "application/json"
+          "X-CSRF-Token": token
         },
-        body: JSON.stringify(body)
+        body: formData
       }).then((response) => {
         if (response.ok) {
           return response.json();
@@ -37597,7 +37614,17 @@
         required: true,
         onChange: (event) => onChange(event, setInstruction)
       }
-    ), /* @__PURE__ */ import_react4.default.createElement("button", { type: "submit", className: "btn custom-button mt-3" }, "Create Recipe"), /* @__PURE__ */ import_react4.default.createElement(Link, { to: "/recipes", className: "btn btn-link mt-3" }, "Back to recipes")))));
+    ), /* @__PURE__ */ import_react4.default.createElement("div", { className: "form-group" }, /* @__PURE__ */ import_react4.default.createElement("label", { htmlFor: "recipeImage" }, "Recipe Image"), /* @__PURE__ */ import_react4.default.createElement(
+      "input",
+      {
+        type: "file",
+        name: "image",
+        id: "recipeImage",
+        className: "form-control-file",
+        onChange: onImageChange,
+        accept: "image/*"
+      }
+    )), /* @__PURE__ */ import_react4.default.createElement("button", { type: "submit", className: "btn custom-button mt-3" }, "Create Recipe"), /* @__PURE__ */ import_react4.default.createElement(Link, { to: "/recipes", className: "btn btn-link mt-3" }, "Back to recipes")))));
   };
   var NewRecipe_default = NewRecipe;
 

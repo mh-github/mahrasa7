@@ -64,16 +64,28 @@ const Recipe = () => {
 
   return (
     <div className="">
-      <div className="hero position-relative d-flex align-items-center justify-content-center">
-        <img
-          src={recipe.image}
-          alt={`${recipe.name} image`}
-          className="img-fluid position-absolute"
-        />
-        <div className="overlay bg-dark position-absolute" />
-        <h1 className="display-4 position-relative text-white">
-          {recipe.name}
-        </h1>
+      <div className="hero position-relative d-flex align-items-center justify-content-center" style={{ height: '400px' }}>
+        {recipe.image_url && (
+          <div style={{ width: '100%', maxWidth: '800px', height: '100%', overflow: 'hidden', position: 'relative' }}>
+            <img
+              src={recipe.image_url}
+              alt={`${recipe.name} image`}
+              style={{
+                width: '100%', // Ensures the image doesn't exceed the width of its container
+                height: '100%', // Ensures the image fills the height of the container
+                objectFit: 'contain', // Ensures the image fits within the container without distortion
+                top: '0', // Reset the top position
+                left: '0', // Reset the left position
+                transform: 'none', // Reset the transform
+              }}
+            />
+          </div>
+        )}
+
+      <h1 className="text-center" style={{position:'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
+        {recipe.name}
+      </h1>
+
       </div>
       <div className="container py-5">
         <div className="row">

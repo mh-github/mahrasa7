@@ -6,6 +6,7 @@ const NewRecipe = () => {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [instruction, setInstruction] = useState("");
+  const [image, setImage] = useState(null);
 
   const stripHtmlEntities = (str) => {
     return String(str)
@@ -18,6 +19,11 @@ const NewRecipe = () => {
     setFunction(event.target.value);
   };
 
+  const onImageChange = (event) => {
+    setImage(event.target.files[0]);
+  };
+
+
   const onSubmit = (event) => {
     event.preventDefault();
     const url = "/api/v1/recipes/create";
@@ -25,20 +31,19 @@ const NewRecipe = () => {
     if (name.length == 0 || ingredients.length == 0 || instruction.length == 0)
       return;
 
-    const body = {
-      name,
-      ingredients,
-      instruction: stripHtmlEntities(instruction),
-    };
+    const formData = new FormData();
+    formData.append("recipe[name]", name);
+    formData.append("recipe[ingredients]", ingredients);
+    formData.append("recipe[instruction]", stripHtmlEntities(instruction));
+    formData.append("recipe[image]", image);
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(url, {
       method: "POST",
       headers: {
         "X-CSRF-Token": token,
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: formData,
     })
       .then((response) => {
         if (response.ok) {
@@ -92,6 +97,17 @@ const NewRecipe = () => {
               required
               onChange={(event) => onChange(event, setInstruction)}
             />
+            <div className="form-group">
+              <label htmlFor="recipeImage">Recipe Image</label>
+              <input
+                type="file"
+                name="image"
+                id="recipeImage"
+                className="form-control-file"
+                onChange={onImageChange}
+                accept="image/*"
+              />
+            </div>
             <button type="submit" className="btn custom-button mt-3">
               Create Recipe
             </button>
